@@ -1,0 +1,42 @@
+openapi: 3.1.0
+info:
+  title: Aifluence Audit API
+  version: 1.0.0
+servers:
+  - url: https://aifluence-three.vercel.app
+paths:
+  /api/audit:
+    post:
+      operationId: auditURL
+      summary: Analyze a webpage for LLM readiness
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  description: The URL of the page to audit
+      responses:
+        '200':
+          description: LLM audit results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  audit:
+                    type: object
+                    properties:
+                      llmReadable:
+                        type: boolean
+                      schemaMarkupPresent:
+                        type: boolean
+                      contentClarityScore:
+                        type: number
+                      recommendations:
+                        type: array
+                        items:
+                          type: string
